@@ -21,15 +21,28 @@ import boopickle.Default._
 import cats.Eq
 import cats.effect.IO
 import cats.effect.testkit.TestContext
+import munit.CatsEffectSuite
+import munit.ScalaCheckSuite
 import org.http4s.MediaType
 import org.http4s.booPickle.implicits._
 import org.http4s.headers.`Content-Type`
 import org.http4s.laws.discipline.EntityCodecTests
 import org.scalacheck.Arbitrary
 import org.scalacheck.Gen
+import org.scalacheck.effect.PropF
 
-class BoopickleSuite extends Http4sSuite with Http4sLawSuite {
+class BoopickleSuite extends CatsEffectSuite with ScalaCheckSuite {
   implicit val testContext: TestContext = TestContext()
+
+  def checkAllF[F[_]](
+      name: String,
+      original: List[(String, PropF[F])],
+  )(implicit loc: munit.Location): Unit =
+    original.foreach { case (l, p) =>
+      test(s"$name - $l") {
+        p
+      }
+    }
 
   trait Fruit {
     val weight: Double
