@@ -9,7 +9,7 @@ ThisBuild / scalaVersion := Scala213
 
 lazy val root = tlCrossRootProject.aggregate(boopickle)
 
-val http4sVersion = "0.23.14"
+val http4sVersion = "0.23.16"
 val boopickleVersion = "1.4.0"
 val munitVersion = "0.7.29"
 val munitCatsEffectVersion = "1.0.7"
