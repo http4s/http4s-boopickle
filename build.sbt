@@ -4,12 +4,12 @@ ThisBuild / developers := List(
 )
 
 val Scala213 = "2.13.8"
-ThisBuild / crossScalaVersions := Seq("2.12.16", Scala213, "3.1.3")
+ThisBuild / crossScalaVersions := Seq("2.12.16", Scala213, "3.2.0")
 ThisBuild / scalaVersion := Scala213
 
 lazy val root = tlCrossRootProject.aggregate(boopickle)
 
-val http4sVersion = "0.23.14"
+val http4sVersion = "0.23.15"
 val boopickleVersion = "1.4.0"
 val munitVersion = "0.7.29"
 val munitCatsEffectVersion = "1.0.7"
