@@ -9,10 +9,10 @@ ThisBuild / scalaVersion := Scala213
 
 lazy val root = tlCrossRootProject.aggregate(boopickle)
 
-val http4sVersion = "0.23.15"
+val http4sVersion = "0.23.17"
 val boopickleVersion = "1.4.0"
-val munitVersion = "0.7.29"
-val munitCatsEffectVersion = "1.0.7"
+val munitVersion = "1.0.0-M7"
+val munitCatsEffectVersion = "2.0.0-M3"
 
 lazy val boopickle = crossProject(JVMPlatform, JSPlatform)
   .crossType(CrossType.Pure)
@@ -25,7 +25,7 @@ lazy val boopickle = crossProject(JVMPlatform, JSPlatform)
       "org.http4s" %%% "http4s-core" % http4sVersion,
       "io.suzaku" %%% "boopickle" % boopickleVersion,
       "org.scalameta" %%% "munit-scalacheck" % munitVersion % Test,
-      "org.typelevel" %%% "munit-cats-effect-3" % munitCatsEffectVersion % Test,
+      "org.typelevel" %%% "munit-cats-effect" % munitCatsEffectVersion % Test,
       "org.http4s" %%% "http4s-laws" % http4sVersion % Test,
     ),
   )
