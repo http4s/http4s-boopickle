@@ -62,7 +62,10 @@ class BoopickleSuite extends CatsEffectSuite with ScalaCheckSuite {
   }
 
   implicit val fruitPickler: Pickler[Fruit] =
-    compositePickler[Fruit].addConcreteType[Banana].addConcreteType[Kiwi].addConcreteType[Carambola]
+    compositePickler[Fruit]
+      .addConcreteType[Banana]
+      .addConcreteType[Kiwi]
+      .addConcreteType[Carambola]
 
   implicit val encoder: EntityEncoder[IO, Fruit] = booEncoderOf[IO, Fruit]
   implicit val decoder: EntityDecoder[IO, Fruit] = booOf[IO, Fruit]
@@ -91,8 +94,8 @@ class BoopickleSuite extends CatsEffectSuite with ScalaCheckSuite {
   }
 
   test("decode a class from a boopickle decoder") {
-    val result = booOf[IO, Fruit]
-      .decode(Request[IO]().withEntity(Banana(10.0): Fruit), strict = true)
+    val result =
+      booOf[IO, Fruit].decode(Request[IO]().withEntity(Banana(10.0): Fruit), strict = true)
     result.value.map(assertEquals(_, Right(Banana(10.0))))
   }
 
