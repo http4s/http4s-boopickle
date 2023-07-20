@@ -3,15 +3,15 @@ ThisBuild / developers := List(
   tlGitHubDev("rossabaker", "Ross A. Baker")
 )
 
-val Scala213 = "2.13.10"
+val Scala213 = "2.13.11"
 ThisBuild / crossScalaVersions := Seq("2.12.17", Scala213, "3.3.0")
 ThisBuild / scalaVersion := Scala213
 
 lazy val root = tlCrossRootProject.aggregate(boopickle)
 
-val http4sVersion = "0.23.19"
+val http4sVersion = "0.23.23"
 val boopickleVersion = "1.4.0"
-val munitVersion = "1.0.0-M7"
+val munitVersion = "1.0.0-M8"
 val munitCatsEffectVersion = "2.0.0-M3"
 
 lazy val boopickle = crossProject(JVMPlatform, JSPlatform)
