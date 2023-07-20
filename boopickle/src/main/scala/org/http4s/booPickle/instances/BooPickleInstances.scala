@@ -30,8 +30,8 @@ import java.nio.ByteBuffer
 import scala.util.Failure
 import scala.util.Success
 
-/** Generic factories for http4s encoders/decoders for boopickle
-  * Note that the media type is set for application/octet-stream
+/** Generic factories for http4s encoders/decoders for boopickle Note that the media type is set
+  * for application/octet-stream
   */
 trait BooPickleInstances {
   private def booDecoderByteBuffer[F[_]: Concurrent, A](
@@ -57,8 +57,6 @@ trait BooPickleInstances {
     */
   def booEncoderOf[F[_], A: Pickler]: EntityEncoder[F, A] =
     chunkEncoder[F]
-      .contramap[A] { v =>
-        Chunk.ByteBuffer(Pickle.intoBytes(v))
-      }
+      .contramap[A](v => Chunk.ByteBuffer(Pickle.intoBytes(v)))
       .withContentType(`Content-Type`(MediaType.application.`octet-stream`))
 }
