@@ -23,7 +23,6 @@ import cats.effect.IO
 import cats.effect.testkit.TestContext
 import munit.CatsEffectSuite
 import munit.ScalaCheckSuite
-import org.http4s.MediaType
 import org.http4s.booPickle.implicits._
 import org.http4s.headers.`Content-Type`
 import org.http4s.laws.discipline.EntityCodecTests
