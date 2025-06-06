@@ -15,7 +15,7 @@ lazy val root = tlCrossRootProject.aggregate(boopickle)
 val http4sVersion = "0.23.30"
 val boopickleVersion = "1.5.0"
 val munitVersion = "1.0.0"
-val munitCatsEffectVersion = "2.0.0"
+val munitCatsEffectVersion = "2.1.0"
 
 lazy val boopickle = crossProject(JVMPlatform, JSPlatform)
   .crossType(CrossType.Pure)
