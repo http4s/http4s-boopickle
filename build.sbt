@@ -8,7 +8,23 @@ ThisBuild / developers := List(
 
 val Scala213 = "2.13.18"
 val Scala212 = "2.12.21"
-val Scala3 = "3.10.1"
+
+/*
+ * Scala 3.10 changed the binary representation of objects nested inside a package
+ * object. In 0.23.11, package$ contained:
+ *
+ * public static final ...package$all$ all;
+ * public static final ...package$booPickle$ booPickle;
+ *
+ * With Scala 3.10.1, those fields are no longer emitted.
+ * MiMa is accurately reporting that binary-shape difference.
+ * This affects both JVM and Scala.js, although rootJS happened to report it first.
+ * Scala 3.10 introduced package-object changes through SIP-68.
+ * Scala 3 change (https://github.com/scala/scala3/pull/24586)
+ *
+ * This project has not been supported since 2024, so this may be the final and only release.
+ */
+val Scala3 = "3.3.9"
 
 ThisBuild / crossScalaVersions := Seq(Scala212, Scala213, Scala3)
 ThisBuild / scalaVersion := Scala213
