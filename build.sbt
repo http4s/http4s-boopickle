@@ -8,17 +8,20 @@ ThisBuild / developers := List(
 
 val Scala213 = "2.13.18"
 val Scala212 = "2.12.21"
-val Scala3 = "3.3.3"
+val Scala3 = "3.10.1"
 
 ThisBuild / crossScalaVersions := Seq(Scala212, Scala213, Scala3)
 ThisBuild / scalaVersion := Scala213
 
 lazy val root = tlCrossRootProject.aggregate(boopickle)
 
-val http4sVersion = "0.23.30"
+val http4sVersion = "0.23.39"
 val boopickleVersion = "1.5.0"
-val munitVersion = "1.0.0"
-val munitCatsEffectVersion = "2.0.0"
+
+//This is the last munitVersion scalaCheck for 2.13
+//So either stop upgrading this version, or stop supporting 2.13
+val munitVersion = "1.3.1"
+val munitCatsEffectVersion = "2.2.1"
 
 lazy val boopickle = crossProject(JVMPlatform, JSPlatform)
   .crossType(CrossType.Pure)
