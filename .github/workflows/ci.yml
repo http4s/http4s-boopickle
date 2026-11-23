@@ -33,18 +33,30 @@ jobs:
         java: [temurin@17, temurin@8, temurin@11, temurin@21]
         project: [rootJS, rootJVM]
         exclude:
-          - scala: 2.12
+          - project: rootJVM
+            scala: 2.12
             java: temurin@11
-          - scala: 2.12
+          - project: rootJVM
+            scala: 2.12
             java: temurin@17
-          - scala: 2.12
+          - project: rootJVM
+            scala: 2.12
             java: temurin@21
-          - scala: 2.13
+          - project: rootJVM
+            scala: 2.13
             java: temurin@21
-          - scala: 3
+          - project: rootJVM
+            scala: 3
             java: temurin@8
-          - scala: 3
+          - project: rootJVM
+            scala: 3
             java: temurin@11
+          - project: rootJS
+            java: temurin@8
+          - project: rootJS
+            java: temurin@11
+          - project: rootJS
+            java: temurin@21
     runs-on: ${{ matrix.os }}
     timeout-minutes: 60
     steps:
@@ -222,6 +234,16 @@ jobs:
       - name: sbt update
         if: matrix.java == 'temurin@21' && steps.setup-java-temurin-21.outputs.cache-hit == 'false'
         run: sbt +update
+
+      - name: Download target directories (2.12, rootJS)
+        uses: actions/download-artifact@v6
+        with:
+          name: target-${{ matrix.os }}-${{ matrix.java }}-2.12-rootJS
+
+      - name: Inflate target directories (2.12, rootJS)
+        run: |
+          tar xf targets.tar
+          rm targets.tar
 
       - name: Download target directories (2.13, rootJS)
         uses: actions/download-artifact@v6

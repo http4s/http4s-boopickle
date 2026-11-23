@@ -37,17 +37,34 @@ ThisBuild / githubWorkflowJavaVersions := Seq(
 )
 
 ThisBuild / githubWorkflowBuildMatrixExclusions := Seq(
-  // Scala 2.12: Java 8 only
-  MatrixExclude(Map("scala" -> "2.12", "java" -> "temurin@11")),
-  MatrixExclude(Map("scala" -> "2.12", "java" -> "temurin@17")),
-  MatrixExclude(Map("scala" -> "2.12", "java" -> "temurin@21")),
+  // JVM: Scala 2.12 on Java 8
+  MatrixExclude(
+    Map("project" -> "rootJVM", "scala" -> "2.12", "java" -> "temurin@11")
+  ),
+  MatrixExclude(
+    Map("project" -> "rootJVM", "scala" -> "2.12", "java" -> "temurin@17")
+  ),
+  MatrixExclude(
+    Map("project" -> "rootJVM", "scala" -> "2.12", "java" -> "temurin@21")
+  ),
 
-  // Scala 2.13: Java 8, 11, and 17
-  MatrixExclude(Map("scala" -> "2.13", "java" -> "temurin@21")),
+  // JVM: Scala 2.13 on Java 8, 11, and 17
+  MatrixExclude(
+    Map("project" -> "rootJVM", "scala" -> "2.13", "java" -> "temurin@21")
+  ),
 
-  // Scala 3: Java 17 and 21
-  MatrixExclude(Map("scala" -> "3", "java" -> "temurin@8")),
-  MatrixExclude(Map("scala" -> "3", "java" -> "temurin@11")),
+  // JVM: Scala 3 on Java 17 and 21
+  MatrixExclude(
+    Map("project" -> "rootJVM", "scala" -> "3", "java" -> "temurin@8")
+  ),
+  MatrixExclude(
+    Map("project" -> "rootJVM", "scala" -> "3", "java" -> "temurin@11")
+  ),
+
+  // Scala.js 1.23 requires Java 17+; test each Scala version once on 17
+  MatrixExclude(Map("project" -> "rootJS", "java" -> "temurin@8")),
+  MatrixExclude(Map("project" -> "rootJS", "java" -> "temurin@11")),
+  MatrixExclude(Map("project" -> "rootJS", "java" -> "temurin@21")),
 )
 
 lazy val root = tlCrossRootProject.aggregate(boopickle)
