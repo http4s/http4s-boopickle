@@ -5,6 +5,7 @@ ThisBuild / developers := List(
   tlGitHubDev("rossabaker", "Ross A. Baker"),
   tlGitHubDev("cquiroz", "Carlos Quiroz"),
 )
+ThisBuild / tlCiReleaseBranches := Seq.empty
 
 val Scala213 = "2.13.18"
 val Scala212 = "2.12.21"
