@@ -40,7 +40,7 @@ trait BooPickleInstances {
     EntityDecoder.collectBinary(m).subflatMap { chunk =>
       val bb = ByteBuffer.wrap(chunk.toArray)
       if (bb.hasRemaining)
-        Unpickle[A](pickler).tryFromBytes(bb) match {
+        Unpickle[A].tryFromBytes(bb) match {
           case Success(bb) => Right(bb)
           case Failure(pf) => Left(MalformedMessageBodyFailure("Invalid binary body", Some(pf)))
         }
