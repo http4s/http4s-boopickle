@@ -13,6 +13,27 @@ val Scala3 = "3.10.1"
 ThisBuild / crossScalaVersions := Seq(Scala212, Scala213, Scala3)
 ThisBuild / scalaVersion := Scala213
 
+ThisBuild / githubWorkflowJavaVersions := Seq(
+  JavaSpec.temurin("17"), // first entry is used by the publish job
+  JavaSpec.temurin("8"),
+  JavaSpec.temurin("11"),
+  JavaSpec.temurin("21"),
+)
+
+ThisBuild / githubWorkflowBuildMatrixExclusions := Seq(
+  // Scala 2.12: Java 8 only
+  MatrixExclude(Map("scala" -> "2.12", "java" -> "temurin@11")),
+  MatrixExclude(Map("scala" -> "2.12", "java" -> "temurin@17")),
+  MatrixExclude(Map("scala" -> "2.12", "java" -> "temurin@21")),
+
+  // Scala 2.13: Java 8, 11, and 17
+  MatrixExclude(Map("scala" -> "2.13", "java" -> "temurin@21")),
+
+  // Scala 3: Java 17 and 21
+  MatrixExclude(Map("scala" -> "3", "java" -> "temurin@8")),
+  MatrixExclude(Map("scala" -> "3", "java" -> "temurin@11")),
+)
+
 lazy val root = tlCrossRootProject.aggregate(boopickle)
 
 val http4sVersion = "0.23.39"
