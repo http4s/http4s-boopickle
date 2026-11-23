@@ -77,6 +77,9 @@ val boopickleVersion = "1.5.0"
 val munitVersion = "1.3.1"
 val munitCatsEffectVersion = "2.2.1"
 
+ThisBuild / resolvers +=
+  "s01 snapshots".at("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+
 lazy val boopickle = crossProject(JVMPlatform, JSPlatform)
   .crossType(CrossType.Pure)
   .in(file("boopickle"))
