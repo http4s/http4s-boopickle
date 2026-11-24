@@ -25,7 +25,7 @@ val Scala212 = "2.12.21"
  *
  * This project has not been supported since 2024, so this may be the final and only release.
  */
-val Scala3 = "3.3.9"
+val Scala3 = "3.9.0"
 
 ThisBuild / crossScalaVersions := Seq(Scala212, Scala213, Scala3)
 ThisBuild / scalaVersion := Scala213
